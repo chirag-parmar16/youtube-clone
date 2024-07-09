@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- CSS File -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* header section*/
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 15px;
+        }
+
+        .main {
+            display: flex;
+            background-color: #f9f9f9;
+        }
+
+        /*Sidebar*/
+        .side-bar {
+            height: 100%;
+            width: 17%;
+            background-color: white;
+            overflow-y: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .side-bar {
+                display: none;
+            }
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .left #menu {
+            padding: 0 7px;
+            cursor: pointer;
+        }
+
+        .left img {
+            width: 170px;
+            height: 70px;
+        }
+
+        .search {
+            display: flex;
+        }
+
+        .search form {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            height: 45px;
+        }
+
+        .search input {
+            width: 600px;
+            padding: 10px;
+            border: 0;
+            height: 100%;
+            border-radius: 22px 0 0 22px;
+            border-color: #000;
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid #ddd;
+        }
+
+        .search button {
+            height: 100%;
+            width: 60px;
+            border: none;
+            border-radius: 2px 22px 22px 0px;
+        }
+
+        .mic {
+            margin-top: 10px;
+        }
+
+        .material-icons {
+            color: rgb(100, 100, 100);
+            padding: 0 7px;
+            cursor: pointer;
+        }
+
+        .logo #logo {
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            height: 40px;
+        }
+
+        .nav {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+        }
+
+        .nav-link span {
+            margin-left: 15px;
+        }
+
+        .nav-link:hover {
+            background-color: #e5e5e5;
+            cursor: pointer;
+        }
+
+        .active {
+            background: #e5e5e5;
+        }
+
+        hr {
+            height: 1px;
+            background-color: #e5e5e5;
+            border: none;
+        }
+
+        .content {
+            background: #f9f9f9;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            overflow-y: scroll;
+        }
+
+        .videos {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .video {
+            width: 270px;
+            margin-bottom: 30px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 170px;
+        }
+
+        .thumbnail img {
+            object-fit: cover;
+            height: 94%;
+            width: 100%;
+            border-radius: 15px;
+            transition: border-radius 0.3s ease;
+        }
+
+        .thumbnail img:hover {
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        .author img {
+            object-fit: cover;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .details {
+            display: flex;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title h3 {
+            color: rgb(3, 3, 3);
+            line-height: 18px;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .title a,
+        span {
+            text-decoration: none;
+            color: rgb(96, 96, 96);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .side-bar {
+                display: none;
+            }
+
+            .search {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .search input {
+                width: 25rem;
+            }
+        }
+
+        .tags {
+            display: flex;
+            gap: 15px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+
+            border-radius: 20px;
+            border: 1px solid #161616;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .tag a {
+            text-decoration: none;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .tag.dark a {
+            color: #fff;
+            background-color: #000;
+        }
+
+        .tag.light a {
+            color: #434343;
+            background-color: #eee;
+        }
+    </style>
+    <title>YouTube Clone with HTML & CSS</title>
+</head>
+
+<body>
+    <!--Header Start-->
+    <header class="header">
+        <div class="logo left">
+            <i id="menu" class="material-icons">menu</i>
+            <img src="./icons/thumbnail/YouTube-Logo.wine.svg" alt="logo_you">
+        </div>
+
+        <div class="search center">
+            <form action="">
+                <input type="text" placeholder="Search" />
+                <button><i class="material-icons">search</i></button>
+            </form>
+            <i class="material-icons mic">mic</i>
+        </div>
+
+        <div class="icons right">
+            <i class="material-icons">videocam</i>
+            <i class="material-icons">apps</i>
+            <i class="material-icons">notifications</i>
+            <i class="material-icons logo">
+                <img id="logo" src="./icons/thumbnail/logo.jpg" alt="">
+            </i>
+        </div>
+
+    </header>
+    <!--header end-->
+
+
+    <main class="main">
+        <div class="side-bar">
+            <div class="nav">
+                <a class="nav-link active">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">local_fire_department</i>
+                    <span>Trending</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Subscriptions</span>
+                </a>
+            </div>
+            <hr>
+            <div class="nav">
+                <a class="nav-link">
+                    <i class="material-icons">library_add_check</i>
+                    <span>Library</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">history</i>
+                    <span>History</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">play_arrow</i>
+                    <span>Your Videos</span>
+                </a>
+                <a class="nav-link">
+                    <i class="material-icons">thumb_up</i>
+                    <span>Liked Videos</span>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="content">
+            <div class="tags">
+                <div class="tag dark"><a href="#">All</a></div>
+                <div class="tag light"><a href="#">Mixed</a></div>
+                <div class="tag light"><a href="#">Marvel</a></div>
+                <div class="tag light"><a href="#">Python</a></div>
+                <div class="tag light"><a href="#">java</a></div>
+            </div>
+            <div class="videos">
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/whatif3.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                A Look Into The Future | Marvel Studios’ What If… ? | Disney+
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span> 1.3M Views • 9 Months Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/kalki_thumbnail.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/kalki.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Kalki 2898 AD Trailer - Hindi | Prabhas | Amitabh Bachchan | Kamal Haasan | Deepika |
+                                Nag Ashwin
+                            </h3>
+                            <a href="">
+                                Vyjayanthi Network
+                            </a>
+                            <span> 34M Views • 8 days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/sarfira.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/sarfira_logo.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>Sarfira - Official Trailer | Akshay Kumar | Paresh Rawal | Radhikka | Sudha Kongara |
+                                12th July 2024</h3>
+                            <a href="">
+                                Abundantia Entertainment
+                            </a>
+                            <span> 20M Views • 1 day Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/farzi.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/amazon.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Farzi Artist And His Biggest CHASE ft. Shahid Kapoor, Vijay Sethupathi, Raashii Khanna
+                                Prime Video India
+                            </h3>
+                            <a href="">
+                                Prime Video India
+                            </a>
+                            <span> 1.4M Views • 6 Days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/wanda.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>
+                                The Scarlet Witch | Marvel Studios' Legends
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span>1.3M views • 9 months ago</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/whatif3.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                A Look Into The Future | Marvel Studios’ What If… ? | Disney+
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span> 1.3M Views • 9 Months Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/kalki_thumbnail.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/kalki.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Kalki 2898 AD Trailer - Hindi | Prabhas | Amitabh Bachchan | Kamal Haasan | Deepika |
+                                Nag Ashwin
+                            </h3>
+                            <a href="">
+                                Vyjayanthi Network
+                            </a>
+                            <span> 34M Views • 8 days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/sarfira.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/sarfira_logo.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>Sarfira - Official Trailer | Akshay Kumar | Paresh Rawal | Radhikka | Sudha Kongara |
+                                12th July 2024</h3>
+                            <a href="">
+                                Abundantia Entertainment
+                            </a>
+                            <span> 20M Views • 1 day Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/farzi.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/amazon.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Farzi Artist And His Biggest CHASE ft. Shahid Kapoor, Vijay Sethupathi, Raashii Khanna
+                                Prime Video India
+                            </h3>
+                            <a href="">
+                                Prime Video India
+                            </a>
+                            <span> 1.4M Views • 6 Days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/wanda.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>
+                                The Scarlet Witch | Marvel Studios' Legends
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span>1.3M views • 9 months ago</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/whatif3.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                A Look Into The Future | Marvel Studios’ What If… ? | Disney+
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span> 1.3M Views • 9 Months Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/kalki_thumbnail.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/kalki.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Kalki 2898 AD Trailer - Hindi | Prabhas | Amitabh Bachchan | Kamal Haasan | Deepika |
+                                Nag Ashwin
+                            </h3>
+                            <a href="">
+                                Vyjayanthi Network
+                            </a>
+                            <span> 34M Views • 8 days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/sarfira.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/sarfira_logo.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>Sarfira - Official Trailer | Akshay Kumar | Paresh Rawal | Radhikka | Sudha Kongara |
+                                12th July 2024</h3>
+                            <a href="">
+                                Abundantia Entertainment
+                            </a>
+                            <span> 20M Views • 1 day Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/farzi.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/amazon.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Farzi Artist And His Biggest CHASE ft. Shahid Kapoor, Vijay Sethupathi, Raashii Khanna
+                                Prime Video India
+                            </h3>
+                            <a href="">
+                                Prime Video India
+                            </a>
+                            <span> 1.4M Views • 6 Days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/wanda.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>
+                                The Scarlet Witch | Marvel Studios' Legends
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span>1.3M views • 9 months ago</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/whatif3.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                A Look Into The Future | Marvel Studios’ What If… ? | Disney+
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span> 1.3M Views • 9 Months Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/kalki_thumbnail.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/kalki.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Kalki 2898 AD Trailer - Hindi | Prabhas | Amitabh Bachchan | Kamal Haasan | Deepika |
+                                Nag Ashwin
+                            </h3>
+                            <a href="">
+                                Vyjayanthi Network
+                            </a>
+                            <span> 34M Views • 8 days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/sarfira.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/sarfira_logo.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>Sarfira - Official Trailer | Akshay Kumar | Paresh Rawal | Radhikka | Sudha Kongara |
+                                12th July 2024</h3>
+                            <a href="">
+                                Abundantia Entertainment
+                            </a>
+                            <span> 20M Views • 1 day Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/farzi.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/amazon.jpg" alt="" />
+                        </div>
+                        <div class="title">
+                            <h3>
+                                Farzi Artist And His Biggest CHASE ft. Shahid Kapoor, Vijay Sethupathi, Raashii Khanna
+                                Prime Video India
+                            </h3>
+                            <a href="">
+                                Prime Video India
+                            </a>
+                            <span> 1.4M Views • 6 Days Ago </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+                <!-- a video starts -->
+                <div class="video">
+                    <div class="thumbnail">
+                        <img src="./icons/thumbnail/wanda.jpg" alt="" />
+                    </div>
+
+                    <div class="details">
+                        <div class="author">
+                            <img src="./icons/thumbnail/marvel.jpg"" alt="" />
+                        </div>
+                        <div class=" title">
+                            <h3>
+                                The Scarlet Witch | Marvel Studios' Legends
+                            </h3>
+                            <a href="">
+                                Marvel Entertainment
+                            </a>
+                            <span>1.3M views • 9 months ago</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- a video Ends -->
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybBogGzK4MDA6Yd7H9kLrJ9gavLrBoPSxO01HZXQ3dCkSDFxT"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ftOfgeFNWVRF7OHVrTvbR5/3YrUdIwTzsZ4Pb3owF0hIdm+0IodGK4dKfYBL8xUd"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
